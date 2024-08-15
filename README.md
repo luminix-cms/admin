@@ -1,6 +1,6 @@
-Requisitos funcionais package ADMIN
+## Requisitos funcionais package ADMIN
 
-1. Configurações
+### 1. Configurações
 
 Configuração deverá ser publicável em `config/luminix/admin.php`.
 
@@ -18,7 +18,7 @@ Estrutura de configuração inicial:
  ii.  A configuração deverá registrar o seu padrão e também ser publicável para alterações no projeto
  iii. A configuração 'luminix.admin.url' deverá ser passada ao frontend APENAS QUANDO o usuário estiver acessando o painel Admin
 
-2. Views e Rotas
+### 2. Views e Rotas
 
 As rotas do Luminix Admin serão registradas em um grupo com o prefixo `/admin` e as middlewares configuradas.
 
@@ -55,7 +55,7 @@ Todas as rotas deverão apontar para um único método em uma controller, que re
 
 Esta view será um html para uma aplicação react, com uma `<div id="root">`, onde será renderizado o `js-mui-cms`.
 
-3. Traduções
+### 3. Traduções
 
 O pacote Admin poderá prover traduções para o painel. As traduções seguirão o padrão de localização do Laravel 11 usando arquivos JSON. Inicialmente o projeto terá apenas tradução para o português. Uma versão inicial dessa tradução ja foi feita em um projeto de teste:
 
@@ -134,16 +134,16 @@ BootService::reducer('wireConfig', function ($config) {
 
 Por fim, deverá haver um endpoint para a [troca do locale da aplicação](https://laravel.com/docs/11.x/localization#configuring-the-locale).
 
-4. Publicações `vendor:publish`
+### 4. Publicáveis com `vendor:publish`
 
-4.1. `tag=luminix-admin-scaffold`
+#### 4.1. `--tag=luminix-admin-scaffold`
 
 Deverá publicar um esqueleto para o CMS no projeto, para que o usuário possa acrescentar plugins e modificar o seu CMS. A utilização sem publicar é possível, mas sem nenhum plugin e com o tema padrão. Este esqueleto precisa ser criado em uma pasta `resources/js`.
 
-4.2. `tag=luminix-config`
+#### 4.2. `--tag=luminix-config`
 
 Publicação do arquivo de configuração
 
-5. Dependências
+### 5. Dependências
 
 Além das dependências do Laravel, o projeto dependerá do Luminix/Frontend e Luminix/Backend
