@@ -64,6 +64,7 @@ O pacote Admin poderá prover traduções para o painel. As traduções seguirã
 {
     ":from–:to of :total": ":from–:to de :total",
     ":model saved successfully": ":model salvo com sucesso",
+    "Add Column": "Adicionar Coluna",
     "All": "Todos",
     "Apply": "Aplicar",
     "Are you sure you want to delete permanently :count :model?": "Tem certeza que deseja excluir :count :model permanentemente?",
@@ -79,6 +80,7 @@ O pacote Admin poderá prover traduções para o painel. As traduções seguirã
     "Create :model": "Criar :model",
     "Created At": "Criado em",
     "Dashboard": "Painel",
+    "Date": "Data",
     "Delete permanently": "Excluir permanentemente",
     "Deleted At": "Excluído em",
     "Descending": "Descendente",
@@ -92,6 +94,7 @@ O pacote Admin poderá prover traduções para o painel. As traduções seguirã
     "No :model found": "Não há :model correspondentes",
     "None": "Nenhuma",
     "Ok": "Ok",
+    "Operator": "Operador",
     "Password": "Senha",
     "Restore": "Restaurar",
     "Rows per page": "Linhas por página",
@@ -107,6 +110,7 @@ O pacote Admin poderá prover traduções para o painel. As traduções seguirã
     "Updated At": "Atualizado em",
     "User": "Usuário",
     "Users": "Usuários",
+    "Value": "Valor",
     "Yes": "Sim"
 }
 ```
