@@ -93,6 +93,7 @@ O pacote Admin poderá prover traduções para o painel. As traduções seguirã
     "Email": "Email",
     "Email Verified At": "Email Verificado Em",
     "Ends Like": "Termina Com",
+    "Filter :model": "Filtrar :model",
     "Like": "Contém",
     "Name": "Nome",
     "New": "Novo",
