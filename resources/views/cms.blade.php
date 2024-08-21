@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <script type="module" crossorigin src="/vendor/luminix/cms/mui-cms.js"></script>
-    <link rel="stylesheet" crossorigin href="/vendor/luminix/cms/style.css">
+    <script type="module" crossorigin src="https://unpkg.com/@luminix/mui-cms@0.0.1-beta.1/bundle/mui-cms.bundle.iife.js"></script>
+    <link rel="stylesheet" crossorigin href="https://unpkg.com/@luminix/mui-cms@0.0.1-beta.1/bundle/style.css">
 </head>
 <body>
     @luminixEmbed()
