@@ -42,6 +42,7 @@ class AdminServiceProvider extends ServiceProvider
                 'luminix' => [
                     ...$config['luminix'] ?? [],
                     'admin' => [
+                        'url' => config('luminix.admin.url', 'admin'),
                         'locales' => config('luminix.admin.locales', ['en', 'pt-BR']),
                         'filter' => [
                             'operators' => ModelFilter::operators(),
