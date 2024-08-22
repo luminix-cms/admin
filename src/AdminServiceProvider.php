@@ -3,14 +3,22 @@
 namespace Luminix\Admin;
 
 use Illuminate\Support\ServiceProvider;
+use Luminix\Admin\Console\Commands\UiCommand;
 use Luminix\Backend\Services\ModelFilter;
 use Luminix\Frontend\Services\BootService;
 
 class AdminServiceProvider extends ServiceProvider
 {
 
+    const CMS_VERSION = '0.0.1-beta.3';
+
+
     public function register()
     {
+        $this->commands([
+            UiCommand::class,
+        ]);
+
         $this->wireConfiguration();
 
         $this->mergeConfigFrom(__DIR__ . '/../config/admin.php', 'luminix.admin');
@@ -18,6 +26,11 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/admin.php' => config_path('luminix/admin.php'),
         ], 'luminix-config');
+
+        $this->publishes([
+            __DIR__ . '/../skeleton/views' => resource_path('views/vendor/admin'),
+            __DIR__ . '/../skeleton/js' => resource_path('js'),
+        ], 'luminix-ui');
     }
 
     public function boot()

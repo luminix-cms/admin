@@ -24,7 +24,7 @@ return [
      * package configuration.
      * 
      */
-    'middleware' => ['web', 'can:view-admin-panel'],
+    'middleware' => ['web', 'auth', 'can:view-admin-panel'],
 
     /**
      * 
