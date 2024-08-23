@@ -23,6 +23,8 @@ class UiCommand extends Command
             "@luminix/mui-cms" => "^" . AdminServiceProvider::CMS_VERSION,
         ];
 
+        ksort($dependencies);
+
         if (!$forced) {
             $table = array_map(function ($key) use ($dependencies) {
                 return [
@@ -35,7 +37,7 @@ class UiCommand extends Command
             $this->newLine(1);
             $this->table(
                 ['Name', 'Version'],
-                $table
+                $table,
             );
         }
             
@@ -44,9 +46,16 @@ class UiCommand extends Command
             $currentPackageJson = json_decode(file_get_contents(base_path('package.json')), true);
             $currentPackageJson['dependencies'] = ($currentPackageJson['dependencies'] ?? []) + $dependencies;
 
+            ksort($currentPackageJson['dependencies']);
+
             $json = json_encode($currentPackageJson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL;
 
-            file_put_contents(base_path('package.json'), $json);
+            $result = file_put_contents(base_path('package.json'), $json);
+
+            if ($result === false) {
+                $this->error('Failed to publish the admin UI. Please check your permissions.');
+                return 1;
+            }
         }
 
         $this->call('vendor:publish', [
@@ -57,7 +66,7 @@ class UiCommand extends Command
 
         if (!$forced) {
             $this->info('Admin UI published successfully.');
-            $this->info('Make sure to have the entry point in `vite.config.js`:');
+            $this->info('Make sure to add the following entry point in [vite.config.js]:');
 
             $this->newLine(1);
 
@@ -66,7 +75,7 @@ class UiCommand extends Command
             $this->line('        laravel({');
             $this->line('            input: [');
             $this->line('                // Other entry points...');
-            $this->line('                "resources/js/luminix-admin.jsx",');
+            $this->info('+               "resources/js/luminix-admin.jsx",');
             $this->line('            ],');
             $this->line('            refresh: true,');
             $this->line('        }),');
