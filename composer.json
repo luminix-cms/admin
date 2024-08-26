@@ -49,16 +49,6 @@
             "@php vendor/bin/phpstan analyse"
         ]
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../frontend"
-        },
-        {
-            "type": "path",
-            "url": "../backend"
-        }
-    ],
     "extra": {
         "laravel": {
             "providers": [
