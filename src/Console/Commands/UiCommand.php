@@ -10,7 +10,7 @@ class UiCommand extends Command
 {
 
     protected $signature = 'luminix:admin-ui
-                            {--force : Overwrite any existing files}';
+                            {--force : Overwrite any existing files without asking}';
 
     protected $description = 'Publishes the admin UI to your application';
 
@@ -40,11 +40,18 @@ class UiCommand extends Command
                 $table,
             );
         }
-            
 
         if ($forced || $this->confirm('Do you wish to continue?', true)) {
             $currentPackageJson = json_decode(file_get_contents(base_path('package.json')), true);
             $currentPackageJson['dependencies'] = ($currentPackageJson['dependencies'] ?? []) + $dependencies;
+
+            $devDeps = array_keys($currentPackageJson['devDependencies'] ?? []);
+
+            foreach ($devDeps as $key) {
+                if (in_array($key, array_keys($dependencies))) {
+                    unset($currentPackageJson['devDependencies'][$key]);
+                }
+            }
 
             ksort($currentPackageJson['dependencies']);
 
