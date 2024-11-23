@@ -10,7 +10,7 @@ use Luminix\Frontend\Services\BootService;
 class AdminServiceProvider extends ServiceProvider
 {
 
-    const CMS_VERSION = '0.0.1-beta.8';
+    const CMS_VERSION = '0.1.0';
 
 
     public function register()
