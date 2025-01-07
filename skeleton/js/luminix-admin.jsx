@@ -9,6 +9,8 @@ import '@fontsource/roboto/700.css';
 
 import '@luminix/react/css/ReactForms.css';
 
+import AppServiceProvider from './Providers/AppServiceProvider';
+
 const container = document.getElementById('root');
 
 if (!container) {
@@ -18,8 +20,8 @@ if (!container) {
 ReactDOM.createRoot(container).render(
     <React.StrictMode>
         <LuminixCms
-            plugins={[
-                // add plugins here...
+            providers={[
+                AppServiceProvider,
             ]}
         />
     </React.StrictMode>
