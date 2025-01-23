@@ -48,7 +48,8 @@
         ],
         "lint": [
             "@php vendor/bin/phpstan analyse"
-        ]
+        ],
+        "artisan": "@php vendor/bin/testbench"
     },
     "extra": {
         "laravel": {

@@ -13,13 +13,20 @@ use Mockery;
 use Workbench\App\Models\User;
 use Workbench\App\Tests\TestCase;
 
-class CmsTest extends TestCase
+class AlternativeConfigurationCmsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+
+        $app['config']->set('luminix.admin.url', 'dashboard');
+    }
+
     public function test_routes_are_protected()
     {
-        $this->json('GET', '/admin')
+        $this->json('GET', '/dashboard')
             ->assertStatus(401);
     }
 
@@ -28,7 +35,7 @@ class CmsTest extends TestCase
      */
     public function test_access_protected_route_without_authentication()
     {
-        $response = $this->get('/admin');
+        $response = $this->get('/dashboard');
 
         $response->assertStatus(302);
 
@@ -57,7 +64,7 @@ class CmsTest extends TestCase
     // dd($response->headers->get('location'), $response->getStatusCode());
     //     $response->assertStatus(200);
 
-    //     // $response->assertRedirect('/admin');
+    //     // $response->assertRedirect('/dashboard');
     // }
 
     public function test_access_protected_route_with_authentication()
@@ -73,12 +80,12 @@ class CmsTest extends TestCase
             'email' => 'john@example.com',
         ]);
         
-        $response = $this->actingAs($user, 'web')->get('/admin');
+        $response = $this->actingAs($user, 'web')->get('/dashboard');
 
-        // $this->json('GET', '/admin')
+        // $this->json('GET', '/dashboard')
         // ->assertStatus(403);
         // dd($response->headers->get('location'), $response->getStatusCode());
-        // $response->assertRedirect('/admin');
+        // $response->assertRedirect('/dashboard');
 
         $response->assertStatus(200); // Acesso autorizado
         $response->assertSeeHtml('script', [
@@ -90,7 +97,7 @@ class CmsTest extends TestCase
 
     public function test_children_routes_are_protected()
     {
-        $this->json('GET', '/admin/children/foo/bar')
+        $this->json('GET', '/dashboard/children/foo/bar')
             ->assertStatus(401);
 
         // add teste logado pra rotas aninhadas
