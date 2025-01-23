@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Luminix\Admin\Support\Unpkg;
 use Mockery;
 use Workbench\App\Models\User;
 use Workbench\App\Tests\TestCase;
@@ -61,19 +62,17 @@ class CmsTest extends TestCase
 
     public function test_access_protected_route_with_authentication()
     {
-        User::create([
+        $user = User::create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => Hash::make('password'),
         ]);
-        // dd(User::first());
 
         $this->assertDatabaseHas('users', [
             'name' => 'John Doe',
             'email' => 'john@example.com',
         ]);
-
-        $user = User::where('email', 'john@example.com')->first();
+        
         $response = $this->actingAs($user, 'web')->get('/admin');
 
         // $this->json('GET', '/admin')
@@ -82,6 +81,10 @@ class CmsTest extends TestCase
         // $response->assertRedirect('/admin');
 
         $response->assertStatus(200); // Acesso autorizado
-        // $response->assertSee('<script');
+        $response->assertSeeHtml('script', [
+            'type' => 'module',
+            'crossorigin' => 'crossorigin',
+            'src' => Unpkg::url('bundle/mui-cms.bundle.iife.js'),
+        ]);
     }
 }
