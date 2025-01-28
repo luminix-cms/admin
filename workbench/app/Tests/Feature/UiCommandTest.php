@@ -76,34 +76,52 @@ class UiCommandTest extends BaseTestCase
         // Cria o arquivo package.json com o conteudo do esqueleto do laravel
         // /vendor/orchestra/testbench-core/laravel/package.json
 
-        $packageJsonPath = base_path('vendor/orchestra/testbench-core/laravel/package.json');
+        $packageJsonPath = base_path('package.json');
 
         // Conteúdo inicial do package.json (esqueleto do Laravel)
         $initialPackageJson = [
-            'name' => 'laravel',
-            'version' => '1.0.0',
-            'dependencies' => [],
-            'peerDependencies' => []
+            'private' => true,
+            'type' => 'module',
+            'scripts' => [
+                'build' => 'vite build',
+                'dev' => 'vite',
+            ],
+            'dependencies' => [
+                'my-dependency' => '^1.0.0',
+                '@luminix/mui-cms' => '^0.1.9',
+            ],
+            'devDependencies' => [
+                'autoprefixer' => '^10.4.20',
+                'axios' => '^1.7.4',
+            ]
         ];
 
-        // Cria o arquivo package.json com o conteúdo inicial
-        if (!is_dir(dirname($packageJsonPath))) {
-            mkdir(dirname($packageJsonPath), 0777, true);
-        }
-        file_put_contents($packageJsonPath, json_encode($initialPackageJson, JSON_PRETTY_PRINT));
+        $expectedPackageJson = [
+            'private' => true,
+            'type' => 'module',
+            'scripts' => [
+                'build' => 'vite build',
+                'dev' => 'vite',
+            ],
+            'dependencies' => [
+                'my-dependency' => '^1.0.0',
+                '@luminix/mui-cms' => '^0.1.9',
+            ],
+            'devDependencies' => [
+                'autoprefixer' => '^10.4.20',
+                'axios' => '^1.7.4',
+            ],
+            'peerDependencies' => [
+                '@emotion/react' => '^11.13.0',
+                '@emotion/styled' => '^11.3.0',
+                '@fontsource/roboto' => '^5.0.12',
+                // ... add other peerDependencies
 
-        // Baixa as peerDependencies do pacote remoto
-        $remotePackage = file_get_contents('https://unpkg.com/@luminix/mui-cms@0.1.9/package.json');
-        $remotePackageJson = json_decode($remotePackage, true);
+                'react' => '^17.0.2',
+                'react-dom' => '^17.0.2',
+            ],
+        ];
 
-        if (isset($remotePackageJson['peerDependencies'])) {
-            $initialPackageJson['peerDependencies'] = array_merge(
-                (array)$initialPackageJson['peerDependencies'],
-                $remotePackageJson['peerDependencies']
-            );
-        }
-
-        // Atualiza o arquivo package.json com as peerDependencies
         file_put_contents($packageJsonPath, json_encode($initialPackageJson, JSON_PRETTY_PRINT));
 
         try {
@@ -118,12 +136,15 @@ class UiCommandTest extends BaseTestCase
             // Verificações:
             // 1. Verifica se o package.json foi atualizado corretamente
             $modifiedPackageJson = json_decode(file_get_contents($packageJsonPath), true);
-            $this->assertArrayHasKey('dependencies', $modifiedPackageJson);
-            $this->assertArrayHasKey('@luminix/mui-cms', $modifiedPackageJson['dependencies']);
-            $this->assertEquals(
-                '^' . \Luminix\Admin\AdminServiceProvider::CMS_VERSION,
-                $modifiedPackageJson['dependencies']['@luminix/mui-cms']
-            );
+            // $this->assertArrayHasKey('dependencies', $modifiedPackageJson);
+            // $this->assertArrayHasKey('@luminix/mui-cms', $modifiedPackageJson['dependencies']);
+            // $this->assertEquals(
+            //     '^' . \Luminix\Admin\AdminServiceProvider::CMS_VERSION,
+            //     $modifiedPackageJson['dependencies']['@luminix/mui-cms']
+            // );
+
+            // AJUSTAR O EXPECTED PACKAGE JSON PARA INCLUIR O CONTEÚDO FINAL
+            $this->assertEquals($expectedPackageJson, $modifiedPackageJson);
 
             // 2. Verifica se os arquivos e diretórios foram publicados
             $jsPath = base_path('resources/js/luminix-admin.jsx');
@@ -137,4 +158,8 @@ class UiCommandTest extends BaseTestCase
             $this->deleteDirectory(base_path('resources/views/vendor/admin'));
         }
     }
+
+    // Teste para atualizar o arquivo package.json (luminix:admin-ui --force)
+
+
 }
