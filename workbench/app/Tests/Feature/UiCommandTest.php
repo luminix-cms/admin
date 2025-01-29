@@ -264,7 +264,7 @@ class UiCommandTest extends BaseTestCase
         // $this->assertEquals('laravel', $updatedPackageJson['name']);
 
         // Apaga os arquivos gerados
-        $this->deleteDirectory($packageJsonPath);
+        $this->deleteFile($packageJsonPath);
         $this->deleteDirectory(base_path('resources/js'));
         $this->deleteDirectory(base_path('resources/views/vendor/admin'));
     }
