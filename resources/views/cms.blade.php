@@ -1,4 +1,4 @@
-@use('Luminix\Admin\Support\Unpkg');
+@use('Luminix\Admin\Support\Unpkg')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
