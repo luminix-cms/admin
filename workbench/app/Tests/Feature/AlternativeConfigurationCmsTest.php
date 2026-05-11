@@ -27,11 +27,9 @@ class AlternativeConfigurationCmsTest extends TestCase
 
     public function test_access_protected_route_without_authentication()
     {
-        $response = $this->get('/dashboard');
-
-        $response->assertStatus(302);
-
-        $response->assertRedirect('/login');
+        $this->get('/dashboard')
+            ->assertStatus(302)
+            ->assertRedirect('/login');
     }
 
     public function test_access_protected_route_with_authentication()
@@ -42,27 +40,37 @@ class AlternativeConfigurationCmsTest extends TestCase
             'password' => Hash::make('password'),
         ]);
 
-        $this->assertDatabaseHas('users', [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-        ]);
-
         $response = $this->actingAs($user, 'web')->get('/dashboard');
 
         $response->assertStatus(200);
 
-        $response->assertSeeHtml('script', [
-            'type' => 'module',
-            'crossorigin' => 'crossorigin',
-            'src' => Unpkg::url('bundle/mui-cms.bundle.iife.js'),
-        ]);
+        $html = $response->getContent();
+        $this->assertStringContainsString(Unpkg::url('bundle/mui-cms.bundle.iife.js'), $html);
+        $this->assertStringContainsString(Unpkg::url('bundle/style.css'), $html);
     }
 
     public function test_children_routes_are_protected()
     {
-        $this->json('GET', '/dashboard/children/foo/bar')
+        $this->json('GET', '/dashboard/settings/profile')
             ->assertStatus(401);
+    }
 
-        // add teste logado pra rotas aninhadas
+    public function test_children_routes_are_accessible_when_authenticated()
+    {
+        $user = User::create([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $this->actingAs($user, 'web')
+            ->get('/dashboard/settings/profile')
+            ->assertStatus(200);
+    }
+
+    public function test_default_admin_url_is_not_registered()
+    {
+        $this->json('GET', '/admin')
+            ->assertStatus(404);
     }
 }

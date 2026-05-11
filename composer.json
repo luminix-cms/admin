@@ -33,7 +33,7 @@
         "orchestra/testbench": "^9.0"
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "@php vendor/bin/testbench package:test",
         "post-autoload-dump": [
             "@clear",
             "@prepare"
