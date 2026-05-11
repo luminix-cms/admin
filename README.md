@@ -2,8 +2,6 @@
 
 Painel de administração CMS para aplicações Laravel, construído com React e Material-UI. Parte do ecossistema [Luminix](https://github.com/luminix-cms).
 
-> **Status:** BETA — API sujeita a mudanças entre versões.
-
 ---
 
 ## Sumário
@@ -295,6 +293,8 @@ Esse provider é passado ao componente `LuminixCms` em `resources/js/luminix-adm
 />
 ```
 
+Para mais informações sobre como personalizar, consulte a [documentação do Luminix MUI CMS](https://github.com/luminix-cms/js-mui-cms) no GitHub.
+
 ---
 
 ## Internacionalização
@@ -346,36 +346,7 @@ composer install
 composer test
 ```
 
-### Servir o workbench
-
-O pacote inclui um workbench (via Orchestra Testbench) para desenvolvimento local:
-
-```bash
-composer serve
-```
-
-Isso compila e serve uma aplicação Laravel mínima com o pacote instalado.
-
-### Lint (PHPStan)
-
-```bash
-composer lint
-```
-
-### Scripts disponíveis
-
-| Comando          | Descrição                                     |
-|------------------|-----------------------------------------------|
-| `composer test`  | Executa a suíte de testes (PHPUnit)           |
-| `composer serve` | Compila e serve o workbench                   |
-| `composer build` | Compila o workbench                           |
-| `composer lint`  | Análise estática com PHPStan                  |
-
-### Publicar nova versão
-
-1. Atualize `CMS_VERSION` em `src/AdminServiceProvider.php`
-2. Publique o pacote npm `@luminix/mui-cms` com a mesma versão no unpkg
-3. Crie a tag git e publique no Packagist
+Para contribuir, faça um pull request ou envie uma issue no repositório.
 
 ---
 
