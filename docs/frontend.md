@@ -2,7 +2,7 @@
 
 O `luminix/frontend` é o pacote responsável por coletar os dados de inicialização da aplicação Laravel e entregá-los ao frontend JavaScript via diretiva Blade `@luminixEmbed()`.
 
-> Documentação de referência do pacote [`luminix/frontend`](../../../frontend/README.md).
+> Documentação de referência do pacote [`luminix/frontend`](https://github.com/luminix-cms/frontend).
 
 ---
 

@@ -1,8 +1,8 @@
 # @luminix/mui-cms
 
-O `@luminix/mui-cms` é a biblioteca de componentes React que fornece a interface visual do painel de administração. Construída com [Material-UI (MUI) v5](https://mui.com/), oferece tabelas, filtros avançados, formulários, notificações e um sistema de extensibilidade via reducers.
+O `@luminix/mui-cms` é a biblioteca de componentes React que fornece a interface visual do painel de administração. Construída com [Material-UI (MUI) v5](https://v5.mui.com/), oferece tabelas, filtros avançados, formulários, notificações e um sistema de extensibilidade via reducers.
 
-> Documentação completa do pacote [`@luminix/mui-cms`](../../../js-mui-cms/docs/index.md).
+> Documentação completa do pacote [`@luminix/mui-cms`](https://github.com/luminix-cms/js-mui-cms).
 
 ---
 
@@ -233,5 +233,5 @@ O pacote requer as seguintes *peer dependencies*:
 - Personalize o tema e os providers em [Personalização](personalizacao.md).
 - Veja como os dados chegam do backend em [luminix/frontend](frontend.md).
 - Configure novos idiomas em [Internacionalização](internacionalizacao.md).
-- Consulte a [documentação completa do @luminix/mui-cms](../../../js-mui-cms/docs/index.md) para referência detalhada de componentes, facades e tipos.
+- Consulte a [documentação completa do @luminix/mui-cms](https://github.com/luminix-cms/js-mui-cms) para referência detalhada de componentes, facades e tipos.
 - Volte ao [índice](index.md).

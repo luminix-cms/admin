@@ -2,7 +2,7 @@
 
 O `luminix/backend` gera automaticamente endpoints RESTful a partir de modelos Eloquent, com filtragem avançada, controle de acesso por Gates e gerenciamento de relacionamentos.
 
-> Documentação de referência do pacote [`luminix/backend`](../../../backend/README.md).
+> Documentação de referência do pacote [`luminix/backend`](https://github.com/luminix-cms/backend).
 
 ---
 
