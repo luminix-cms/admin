@@ -35,10 +35,10 @@ class UiCommandTest extends BaseTestCase
             '@emotion/react' => '^11.13.0',
             '@emotion/styled' => '^11.13.0',
             '@fontsource/roboto' => '^5.0.12',
-            '@luminix/core' => '^0.3.1',
-            '@luminix/mui-cms' => '^0.1.9',
-            '@luminix/react' => '^0.3.1',
-            '@luminix/support' => '^0.4.3',
+            '@luminix/core' => '^1.0.0',
+            '@luminix/mui-cms' => '^1.0.0',
+            '@luminix/react' => '^1.0.0',
+            '@luminix/support' => '^1.0.1',
             '@mui/icons-material' => '^5.16.5',
             '@mui/material' => '^5.16.5',
             'i18next' => '^23.12.2',
@@ -140,7 +140,7 @@ class UiCommandTest extends BaseTestCase
             $updatedPackageJson = json_decode(file_get_contents($packageJsonPath), true);
 
             $this->assertArrayHasKey('@luminix/mui-cms', $updatedPackageJson['dependencies']);
-            $this->assertNotEquals('^1.0.0', $updatedPackageJson['dependencies']['@luminix/mui-cms']);
+            $this->assertEquals('^' . \Luminix\Admin\AdminServiceProvider::CMS_VERSION, $updatedPackageJson['dependencies']['@luminix/mui-cms']);
             $this->assertArrayNotHasKey('jest', $updatedPackageJson['devDependencies'] ?? []);
         } finally {
             $this->deleteFile($packageJsonPath);
