@@ -10,7 +10,23 @@ use Luminix\Frontend\Services\BootService;
 class AdminServiceProvider extends ServiceProvider
 {
 
-    const CMS_VERSION = '0.1.9';
+    const CMS_VERSION = '1.0.0';
+
+    const PEER_DEPENDENCIES = [
+        '@emotion/react'      => '^11.13.0',
+        '@emotion/styled'     => '^11.13.0',
+        '@fontsource/roboto'  => '^5.0.12',
+        '@luminix/core'       => '^1.0.0',
+        '@luminix/react'      => '^1.0.0',
+        '@luminix/support'    => '^1.0.1',
+        '@mui/icons-material' => '^5.16.5',
+        '@mui/material'       => '^5.16.5',
+        'i18next'             => '^23.12.2',
+        'react'               => '^18.3.1',
+        'react-dom'           => '^18.3.1',
+        'react-i18next'       => '^15.0.1',
+        'react-router-dom'    => '6.25.1',
+    ];
 
 
     public function register()

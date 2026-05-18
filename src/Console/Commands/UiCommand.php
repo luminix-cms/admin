@@ -4,7 +4,6 @@ namespace Luminix\Admin\Console\Commands;
 
 use Illuminate\Console\Command;
 use Luminix\Admin\AdminServiceProvider;
-use Luminix\Admin\Support\Unpkg;
 
 class UiCommand extends Command
 {
@@ -18,8 +17,7 @@ class UiCommand extends Command
     {
         $forced = $this->option('force');
 
-        $peerDeps = json_decode(file_get_contents(Unpkg::url('package.json')), true)['peerDependencies'] ?? [];
-        $dependencies = $peerDeps + [
+        $dependencies = AdminServiceProvider::PEER_DEPENDENCIES + [
             "@luminix/mui-cms" => "^" . AdminServiceProvider::CMS_VERSION,
         ];
 
@@ -43,7 +41,7 @@ class UiCommand extends Command
 
         if ($forced || $this->confirm('Do you wish to continue?', true)) {
             $currentPackageJson = json_decode(file_get_contents(base_path('package.json')), true);
-            $currentPackageJson['dependencies'] = ($currentPackageJson['dependencies'] ?? []) + $dependencies;
+            $currentPackageJson['dependencies'] = array_merge($currentPackageJson['dependencies'] ?? [], $dependencies);
 
             $devDeps = array_keys($currentPackageJson['devDependencies'] ?? []);
 
