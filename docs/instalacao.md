@@ -4,10 +4,10 @@ Este guia cobre a instalação completa do `luminix/admin` em uma aplicação La
 
 ## Requisitos
 
-| Requisito | Versão mínima |
-|-----------|--------------|
-| PHP | 8.2+ |
-| Laravel | 11.x |
+| Requisito | Versão suportada |
+|-----------|-----------------|
+| PHP | 8.2+ (8.3+ para Laravel 13) |
+| Laravel | 11.x, 12.x ou 13.x |
 | Node.js | 18+ (apenas modo Vite) |
 | Composer | 2.x |
 
