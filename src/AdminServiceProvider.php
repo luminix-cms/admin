@@ -73,6 +73,11 @@ class AdminServiceProvider extends ServiceProvider
                     'admin' => [
                         'url' => config('luminix.admin.url', 'admin'),
                         'locales' => config('luminix.admin.locales', ['en', 'pt-BR']),
+                        'brand' => [
+                            'name' => config('luminix.admin.brand.name') ?: config('app.name'),
+                            'logo' => config('luminix.admin.brand.logo'),
+                            'logo_dark' => config('luminix.admin.brand.logo_dark'),
+                        ],
                         'filter' => [
                             'operators' => ModelFilter::operators(),
                             'exclude' => config('luminix.backend.api.filter.exclude', [])

@@ -35,4 +35,23 @@ return [
      */
     'locales' => ['en', 'pt-BR'],
 
+    /**
+     *
+     * Identity of the product that hosts the panel.
+     *
+     * Without this, the panel shows the Luminix mark to the end user of every
+     * application built on it — and each application has to override the logo
+     * component just to stop shipping someone else's brand.
+     *
+     * `logo` and `logo_dark` are URLs served by the application; `name` is the
+     * accessible text and falls back to `app.name`. Leaving all of them unset
+     * keeps the Luminix mark, so nothing changes for who does not care.
+     *
+     */
+    'brand' => [
+        'name' => env('LUMINIX_ADMIN_BRAND_NAME'),
+        'logo' => env('LUMINIX_ADMIN_BRAND_LOGO'),
+        'logo_dark' => env('LUMINIX_ADMIN_BRAND_LOGO_DARK'),
+    ],
+
 ];
