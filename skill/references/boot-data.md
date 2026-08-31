@@ -11,10 +11,11 @@ package through a `wireConfig` reducer.
 | `trans` | every JSON translation line of `config('app.locale')` -> `translations.md` |
 | `luminix.admin.url` | the configured prefix; the panel uses it as its router basename |
 | `luminix.admin.locales` | the configured list, verbatim |
+| `luminix.admin.brand` | `{name, logo, logo_dark}`; `name` is never empty — it falls back to `app.name`, the logos to `null` -> `configuration.md` |
 | `luminix.admin.filter.operators` | `ModelFilter::operators()` — the built-in operators plus every macro registered on `luminix/backend`, so a custom operator appears in the panel's filter dropdown without frontend work |
 | `luminix.admin.filter.exclude` | `luminix.backend.api.filter.exclude`, verbatim |
 
-The panel's own components consume `url` and `filter.operators`; `locales` and `filter.exclude` are
+The panel's own components consume `url`, `brand` and `filter.operators`; `locales` and `filter.exclude` are
 exposed for client code to read.
 
 Everything else in the payload — `app`, `auth`, `manifest` — is `luminix/frontend`'s.
@@ -35,7 +36,7 @@ BootService::reducer('wireConfig', fn (array $config) => [
 ```
 
 Spread the existing `luminix` block as above. This package's own reducer does the same, so the two
-compose in either registration order; overwriting the block instead drops `url`, `locales` and the
-filter data and breaks panel routing.
+compose in either registration order; overwriting the block instead drops `url`, `locales`, `brand` and
+the filter data and breaks panel routing.
 
 Read it back in the panel with `Config.get('luminix.admin.myFlag')` -> `@luminix/core`.

@@ -1,6 +1,6 @@
 ---
 name: luminix-admin
-description: luminix/admin — Laravel host for the MUI admin panel. Install and first render, Vite vs CDN mode and the luminix:admin-ui command, the view-admin-panel gate and the session the API shares, the boot data the panel reads, panel translations, config keys. Read this before crawling vendor/luminix/admin/src.
+description: luminix/admin — Laravel host for the MUI admin panel. Install and first render, Vite vs CDN mode and the luminix:admin-ui command, the view-admin-panel gate and the session the API shares, the boot data the panel reads, panel translations, config keys, the panel's logo and brand. Read this before crawling vendor/luminix/admin/src.
 allowed-tools: Read(.claude/skills/luminix-admin/**), Read(vendor/luminix/admin/**)
 ---
 
@@ -16,7 +16,7 @@ No panel component, table or form lives here.
 |---|---|
 | `references/getting-started.md` | installing, the first render, why the drawer is empty or the panel shows nothing |
 | `references/ui-modes.md` | `luminix:admin-ui`, CDN vs Vite, the published skeleton, Vite entry wiring, upgrading the bundle |
-| `references/configuration.md` | `config/luminix/admin.php` — `url`, `middleware`, `locales` |
+| `references/configuration.md` | `config/luminix/admin.php` — `url`, `middleware`, `locales`, `brand` (logo and name in the app bar) |
 | `references/access-control.md` | `view-admin-panel`, what each denial returns, matching the API's auth middleware |
 | `references/boot-data.md` | what this package injects into the frontend config, and adding keys of your own |
 | `references/translations.md` | panel strings, overriding one, adding a language, picking the language |

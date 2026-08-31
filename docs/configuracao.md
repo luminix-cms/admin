@@ -26,6 +26,13 @@ return [
     // Locales suportados pela interface do painel.
     'locales' => ['en', 'pt-BR'],
 
+    // Identidade da aplicação exibida no painel.
+    'brand' => [
+        'name' => env('LUMINIX_ADMIN_BRAND_NAME'),
+        'logo' => env('LUMINIX_ADMIN_BRAND_LOGO'),
+        'logo_dark' => env('LUMINIX_ADMIN_BRAND_LOGO_DARK'),
+    ],
+
 ];
 ```
 
@@ -105,11 +112,41 @@ O `AdminServiceProvider` carrega automaticamente as traduções do locale ativo 
 
 ---
 
+### `brand`
+
+**Tipo:** `array`  
+**Padrão:** todas as chaves `null` — o painel exibe a marca do Luminix
+
+Define o logotipo e o nome exibidos na barra superior do painel, para que o usuário final veja a marca da sua aplicação, e não a do Luminix.
+
+| Chave | Variável de ambiente | Descrição |
+|-------|----------------------|-----------|
+| `name` | `LUMINIX_ADMIN_BRAND_NAME` | Texto alternativo do logotipo. Quando vazio, usa `config('app.name')` |
+| `logo` | `LUMINIX_ADMIN_BRAND_LOGO` | URL do logotipo |
+| `logo_dark` | `LUMINIX_ADMIN_BRAND_LOGO_DARK` | URL do logotipo para o esquema escuro do sistema. Quando vazio, usa `logo` |
+
+```env
+# .env
+LUMINIX_ADMIN_BRAND_LOGO=/brand/logo.svg
+LUMINIX_ADMIN_BRAND_LOGO_DARK=/brand/logo-branco.svg
+```
+
+As URLs são usadas pelo navegador sem transformação: aponte para um arquivo que a aplicação serve, como `public/brand/logo.svg`. O painel desenha a imagem em um quadrado de 40×40 px, então prefira um símbolo quadrado a um logotipo horizontal.
+
+A variação escura é aplicada conforme `prefers-color-scheme` do sistema do usuário. Sem `logo_dark`, o mesmo `logo` aparece nos dois esquemas; sem nenhum dos dois, a marca do Luminix permanece.
+
+> Antes desta opção, trocar a marca exigia substituir o componente `Layout.AppLogo` pelo reducer `componentMap` do `@luminix/mui-cms`. Esse caminho continua disponível para quem precisa de mais do que uma imagem — veja [Personalização](personalizacao.md#marca-do-painel).
+
+---
+
 ## Variáveis de ambiente
 
 | Variável | Padrão | Descrição |
 |----------|--------|-----------|
 | `LUMINIX_ADMIN_URL` | `/admin` | Prefixo de URL do painel |
+| `LUMINIX_ADMIN_BRAND_NAME` | `app.name` | Nome da marca exibida no painel |
+| `LUMINIX_ADMIN_BRAND_LOGO` | marca do Luminix | URL do logotipo |
+| `LUMINIX_ADMIN_BRAND_LOGO_DARK` | `LUMINIX_ADMIN_BRAND_LOGO` | URL do logotipo no esquema escuro |
 
 ---
 
