@@ -83,6 +83,18 @@ Consulte a [documentação do Material-UI](https://mui.com/material-ui/customiza
 
 ---
 
+## Marca do painel
+
+O logotipo e o nome na barra superior vêm da configuração `brand`, sem código de frontend:
+
+```env
+LUMINIX_ADMIN_BRAND_LOGO=/brand/logo.svg
+```
+
+Consulte [Configuração](configuracao.md#brand) para todas as chaves e o comportamento de reserva. Se a marca precisar de mais do que uma imagem — um link, um texto ao lado, uma animação —, substitua o componente `Layout.AppLogo` pelo reducer `componentMap` do [@luminix/mui-cms](js-mui-cms.md#extensibilidade).
+
+---
+
 ## Múltiplos providers
 
 Você pode organizar a customização em múltiplos providers e passá-los em ordem:

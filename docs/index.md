@@ -12,7 +12,7 @@
 | [Instalação](instalacao.md) | Guia passo a passo para instalar e colocar o painel no ar |
 | [Configuração](configuracao.md) | Todas as opções do arquivo `config/luminix/admin.php` |
 | [Autorização](autorizacao.md) | Gates, middlewares e controle de acesso por linha |
-| [Personalização](personalizacao.md) | `AppServiceProvider`, tema Material-UI e extensão via providers |
+| [Personalização](personalizacao.md) | `AppServiceProvider`, marca, tema Material-UI e extensão via providers |
 | [Internacionalização](internacionalizacao.md) | Suporte a múltiplos idiomas e como adicionar novas traduções |
 | [luminix/backend](backend.md) | API REST automática: modelos, filtros, segurança e eventos |
 | [luminix/frontend](frontend.md) | Injeção de boot data, manifest e reducers via Blade |
