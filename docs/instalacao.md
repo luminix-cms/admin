@@ -8,8 +8,10 @@ Este guia cobre a instalação completa do `luminix/admin` em uma aplicação La
 |-----------|-----------------|
 | PHP | 8.2+ (8.3+ para Laravel 13) |
 | Laravel | 11.x, 12.x ou 13.x |
-| Node.js | 18+ (apenas modo Vite) |
+| Node.js | 20+ (apenas modo Vite) |
 | Composer | 2.x |
+
+O painel usa o React Router 7, que exige Node.js 20 ou mais novo no ambiente onde roda `npm install` e `npm run build`. O [modo CDN](#modo-cdn-sem-build) dispensa o Node.js.
 
 ---
 
@@ -31,8 +33,8 @@ php artisan luminix:admin-ui
 
 Este comando:
 
-1. Consulta as *peer dependencies* do pacote npm `@luminix/mui-cms` no CDN unpkg
-2. Adiciona essas dependências ao `package.json` do seu projeto (cria o arquivo se não existir)
+1. Monta a lista de dependências npm do painel: `@luminix/mui-cms` 2.x e as *peer dependencies* nas versões que ele exige — React 18, Material-UI 5 e React Router 7, entre outras (veja a [tabela completa](js-mui-cms.md#dependências)). A lista vem embutida no `luminix/admin`; o comando não consulta o npm nem o unpkg
+2. Adiciona essas dependências ao `package.json` do seu projeto (todo projeto Laravel novo traz um), trocando a versão dos pacotes que já estiverem lá
 3. Publica o skeleton de frontend via `vendor:publish`:
    - `resources/views/vendor/admin/cms.blade.php` — view Blade com suporte a Vite
    - `resources/js/luminix-admin.jsx` — entry point React
@@ -80,6 +82,8 @@ npm run dev     # desenvolvimento com HMR
 # ou
 npm run build   # build de produção
 ```
+
+> Use o Node.js 20 ou mais novo (veja os [requisitos](#requisitos)).
 
 ---
 
@@ -144,6 +148,42 @@ class Post extends Model
 ```
 
 Isso gera automaticamente os endpoints REST em `/luminix-api/posts` e faz o modelo aparecer na navegação lateral do painel. Consulte [luminix/backend](backend.md) para a documentação completa.
+
+---
+
+## Atualizando da 1.x para a 2.x
+
+A 2.0 entrega o painel `@luminix/mui-cms` 2.0, que troca o React Router 6 pelo **React Router 7**. Quem usa o `luminix/admin` 1.x precisa subir a restrição no Composer; quem usa o modo Vite também regrava o `package.json` e reinstala as dependências npm.
+
+### Modo CDN
+
+Basta atualizar o pacote. A URL do unpkg passa a apontar para a 2.0.0 e não há mais nada a fazer:
+
+```bash
+composer require luminix/admin:^2.0
+```
+
+### Modo Vite
+
+1. Confirme que o ambiente de build usa **Node.js 20 ou mais novo**, o mínimo do React Router 7.
+2. Atualize o pacote, regrave o `package.json` e reinstale as dependências:
+
+   ```bash
+   composer require luminix/admin:^2.0
+   php artisan luminix:admin-ui
+   npm install
+   ```
+
+   Confirme a lista que o comando mostra. Ele leva `@luminix/mui-cms` para `^2.0.0` e `react-router-dom` — que a 1.x fixava em `6.25.1` — para `^7.18.0`, e sobe `@luminix/core`, `@luminix/react` e `@luminix/support` para as versões que o painel 2.0 exige. As demais dependências do seu projeto ficam como estão, e os arquivos que você já publicou (`resources/js/luminix-admin.jsx`, `resources/js/Providers/AppServiceProvider.js` e a view) também: a 2.0 não muda o skeleton.
+
+   > Rode sem o `--force`: ele pula a confirmação, mas também sobrescreve esses arquivos publicados, e com eles qualquer personalização sua.
+
+3. Revise o código do seu projeto que usa o React Router diretamente. Os imports de `react-router-dom` continuam valendo na 7, mas o React Router 7 não instala mais o `@remix-run/router`: imports diretos dele passam a vir de `react-router`. O [guia de atualização do React Router](https://reactrouter.com/7.18.0/upgrading/v6) lista as demais mudanças.
+4. Plugins do ecossistema que declaram `react-router-dom` 6 ou `@luminix/mui-cms` 1.x como *peer dependency* fazem o `npm install` falhar com `ERESOLVE` até ganharem uma versão compatível com a 2.x.
+
+### Ficando na 1.x
+
+Quem não pode migrar para o React Router 7 permanece em `luminix/admin` `^1.0`, que usa `@luminix/mui-cms` 1.x com o React Router 6 e é mantido na branch `v1.x`.
 
 ---
 

@@ -11,7 +11,7 @@ composer require luminix/admin
 # 2. Publicar os arquivos de UI
 php artisan luminix:admin-ui
 
-# 3. Instalar dependências e compilar
+# 3. Instalar dependências e compilar (requer Node.js 20+)
 npm install && npm run dev
 ```
 

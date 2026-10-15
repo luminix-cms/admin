@@ -7,6 +7,7 @@ loads your Vite build instead. Deleting it reverts the app to the CDN.
 | | CDN (default) | Vite |
 |---|---|---|
 | JS build | none | yours (`npm run dev` / `npm run build`) |
+| Node.js | not needed | 20 or newer |
 | Panel version | `AdminServiceProvider::CMS_VERSION`, moved only by upgrading this composer package | whatever your `package.json` resolves |
 | Frontend customization | impossible | JS `AppServiceProvider` -> `@luminix/mui-cms` |
 
@@ -38,9 +39,10 @@ npm install && npm run dev
 
 ## Installing the JS by hand
 
-For a non-Laravel build pipeline, the dependency set is `@luminix/mui-cms` plus the package's
-`AdminServiceProvider::PEER_DEPENDENCIES` — read the constant for the exact versions, they are
-pinned there and some are exact rather than caret ranges:
+For a non-Laravel build pipeline (Node.js 20 or newer), the dependency set is `@luminix/mui-cms`
+plus the package's `AdminServiceProvider::PEER_DEPENDENCIES`. The constant holds the ranges
+(`CMS_VERSION` is the panel's own); give every name below its range, because a bare name installs
+`latest`, which can fall outside what the panel accepts:
 
 ```bash
 npm install @luminix/mui-cms @luminix/core @luminix/react @luminix/support \
