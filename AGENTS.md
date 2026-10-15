@@ -61,8 +61,12 @@ unpkg URLs from the same constant, so they stay green either way.
 
 ## Git
 
-- `v1.x` is the release branch; work on `feat/`/`fix/` branches and merge into it
-- every push to `v1.x` runs the 10-job matrix (PHP 8.2-8.5 x Laravel 11/12/13) and, only if it is
+- `v2.x` is the release branch; work on `feat/`/`fix/` branches and merge into it
+- `v1.x` is the maintenance line for hosts that stay on react-router 6 (`@luminix/mui-cms` 1.x). It
+  keeps its own workflow and its releases stay 1.x: a `(MAJOR)` subject there would compute 2.0.0,
+  the tag `v2.x` owns
+- every push to `v2.x` runs the 10-job matrix (PHP 8.2-8.5 x Laravel 11/12/13) and, only if it is
   green, cuts a tag + Release
-- semver comes from the commit subject: `(MAJOR)` -> major, `(MINOR)` -> minor, absence -> patch
+- semver comes from the commit subject: `(MAJOR)` -> major, `(MINOR)` -> minor, absence -> patch,
+  counted from the latest tag reachable from the pushed branch
 - commit messages and branch names in português
