@@ -204,18 +204,23 @@ O pacote requer as seguintes *peer dependencies*:
 
 | Pacote | Versão | Função |
 |--------|--------|--------|
-| `@luminix/core` | `^1.0.0` | Contêiner, modelos e roteamento |
-| `@luminix/react` | `^1.0.0` | Hooks e componentes React base |
-| `@luminix/support` | `^1.0.1` | Utilitários e padrão ServiceProvider |
+| `@luminix/core` | `^1.1.0` | Contêiner, modelos e roteamento |
+| `@luminix/react` | `^1.3.0` | Hooks e componentes React base |
+| `@luminix/support` | `^1.2.1` | Utilitários e padrão ServiceProvider |
 | `@mui/material` | `^5.16.5` | Componentes Material-UI |
 | `@mui/icons-material` | `^5.16.5` | Ícones Material-UI |
+| `@emotion/react` | `^11.13.0` | Motor de estilos do Material-UI |
+| `@emotion/styled` | `^11.13.0` | API `styled` do Material-UI |
+| `@fontsource/roboto` | `^5.0.12` | Fonte Roboto, tipografia padrão do Material-UI |
 | `react` | `^18.3.1` | React |
 | `react-dom` | `^18.3.1` | React DOM |
-| `react-router-dom` | `6.25.1` | Roteamento SPA |
+| `react-router-dom` | `^7.18.0` | Roteamento SPA (React Router 7) |
 | `i18next` | `^23.12.2` | Internacionalização |
 | `react-i18next` | `^15.0.1` | Bindings React para i18next |
 
 > Ao usar o modo Vite com `luminix:admin-ui`, todas essas dependências são adicionadas automaticamente ao `package.json`.
+
+> O React Router 7 exige Node.js 20 ou mais novo para instalar e compilar.
 
 ---
 
