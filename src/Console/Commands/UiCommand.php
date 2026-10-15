@@ -90,7 +90,7 @@ class UiCommand extends Command
 
             $this->newLine(1);
 
-            $this->info('Then, run `npm install && npm run dev`.');
+            $this->info('Then, run `npm install && npm run dev` (Node.js 20 or newer is required).');
         }
 
     }

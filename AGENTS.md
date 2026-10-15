@@ -53,6 +53,12 @@ unpkg bundle URLs and the `package.json` that `luminix:admin-ui` writes. `UiComm
 that resulting `package.json` literally, so bumping either constant means editing
 `$expectedPackageJson` in the same commit.
 
+`PEER_DEPENDENCIES` mirrors the `peerDependencies` of the `@luminix/mui-cms` release that
+`CMS_VERSION` names, and nothing checks the two against each other. When `CMS_VERSION` moves, copy
+the peers from `npm view @luminix/mui-cms@<version> peerDependencies --json` and confirm that
+`bundle/mui-cms.bundle.iife.js` and `bundle/style.css` exist in that release — the tests build the
+unpkg URLs from the same constant, so they stay green either way.
+
 ## Git
 
 - `v1.x` is the release branch; work on `feat/`/`fix/` branches and merge into it
